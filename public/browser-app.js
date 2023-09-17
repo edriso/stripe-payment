@@ -5,9 +5,16 @@ const purchase = [
 const total_amount = 10998;
 const shipping_fee = 1099;
 
-var stripe = Stripe(
-  'pk_test_51I87djFp5pnuKUXgBVIHiR36vVAWyfuyb7ckrhgyDNA1kM0GWHas9ZGUAgwJSFNUxrbyE6NwlMNmls1iGSfzHDdE00DQB3y6AH'
-);
+let stripe;
+fetch('/stripe-publishable-key')
+  .then((response) => response.json())
+  .then((data) => {
+    const stripePublishableKey = data.stripePublishableKey;
+    stripe = Stripe(stripePublishableKey);
+  })
+  .catch((error) => {
+    console.error('Error fetching Stripe publishable key:', error);
+  });
 
 // The items the customer wants to buy
 
@@ -94,7 +101,7 @@ var orderComplete = function (paymentIntentId) {
     .querySelector('.result-message a')
     .setAttribute(
       'href',
-      'https://dashboard.stripe.com/test/payments/' + paymentIntentId
+      'https://dashboard.stripe.com/test/payments/' + paymentIntentId,
     );
   document.querySelector('.result-message').classList.remove('hidden');
   document.querySelector('button').disabled = true;
