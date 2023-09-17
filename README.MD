@@ -42,7 +42,7 @@ These instructions will help you set up and run the project on your local machin
      STRIPE_SECRET_KEY=your_stripe_secret_key
      ```
 
-     Replace `your_email@example.com` and `your_email_password` with your actual email credentials.
+     Replace `your_stripe_publishable_key` and `your_stripe_secret_key` with your actual Stripe API keys.
 
 5. Start the application:
 
