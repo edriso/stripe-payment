@@ -7,7 +7,7 @@ const app = express();
 // controller
 const {
   getStripePublishableKey,
-  stripe,
+  createPaymentIntent,
 } = require('./controllers/stripeController');
 
 // error handler
@@ -20,7 +20,7 @@ app.use(express.static('./public'));
 // stripe
 app.get('/stripe-publishable-key', getStripePublishableKey);
 
-app.post('/stripe', stripe);
+app.post('/create-payment-intent', createPaymentIntent);
 
 app.use(notFoundMiddleware);
 app.use(errorHandlerMiddleware);
